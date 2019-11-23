@@ -15,30 +15,25 @@ with (processingInstance) {
 size(400, 400); 
 frameRate(120);
 
-var numCells = 3;
-var offset = 400 / numCells;
-var val = '+';
-
-for (var i = 1; i < numCells; i++) {
-    var x = offset * i;
-    line(x,0,x,400/numCells);
-}
-
-line(0,400/numCells,400,400/numCells);
-
-
-var printCell = function(i, val) { 
-    fill(0, 0, 0);
+var printCell = function(i, val, offset){
+    fill (0, 0, 0);
     var textLength = (('' + val).length/2)*5;
-    text(val,i * offset + offset/2-textLength, offset/2+textLength);
-
+    text (val, i * offset + offset/2-textLength, offset /2 +textLength);
 };
 
-
-
-for (var i = 0; i < numCells; i++) {
-        printCell(i,val);
-}
+var printArray = function(arr) {
+    var numCells = arr.length;
+    var offset = 400 / numCells;
+    line(0, 0, 400, 0);
+    line(0, offset, 400, offset);
+    for (var i = 0 ; i < numCells; i++) {
+       var x = offset * i + offset;
+       line(x, 0, x, offset);
+    }    
+    for (var i = 0 ; i < numCells;i++) {
+        printCell(i, arr[i], offset);
+    }
+};
 
 //END
 }
