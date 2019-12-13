@@ -1,0 +1,62 @@
+<html> 
+ <head>
+    <title></title> 
+</head>
+ <body>
+    <p align="center"> 
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body> 
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+ <script>
+var sketchProc = function(processingInstance) {
+with (processingInstance) {
+//START
+size(400, 400); 
+frameRate(120);
+var array0 = [0, 1, 12, 19, 5, -1];
+var m = -9007199254741396;
+
+var printCell = function(i, val, offset){
+    fill (0, 0, 0);
+    var textLength = (('' + val).length/2)*5;
+    text (val, i * offset + offset/2-textLength, offset /2 +textLength);
+};
+
+var printArray = function(arr) {
+    var numCells = arr.length;
+    var offset = 400 / numCells;
+    line(0, 0, 400, 0);
+    line(0, offset, 400, offset);
+    for (var i = 0 ; i < numCells; i++) {
+       var x = offset * i + offset;
+       line(x, 0, x, offset);
+    }    
+    for (var i = 0 ; i < numCells;i++) {
+        printCell(i, arr[i], offset);
+    }
+};
+
+var removeValueFromArray = function(arr, val) {
+    return arr.filter(function(value, index) {
+        return value !== val;
+    });
+};
+
+for (var i = 0; i < array0.length; i++) {
+    if (array0[i] > m){
+        m = array0[i];
+    }
+}
+
+
+println(m);
+//END
+}
+};
+
+var canvas = document.getElementById("mycanvas"); 
+var processingInstance = new Processing(canvas, sketchProc); 
+ </script>
+
+</html>
